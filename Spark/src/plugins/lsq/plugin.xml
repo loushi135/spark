@@ -1,0 +1,13 @@
+<!-- Define your plugins -->
+<plugin>
+    <name>lsq Plugin</name>
+    <version>0.1 Beta </version>
+    <author>sqluo</author>
+    <homePage>http://bolg.luoshiqian.com</homePage>
+    <email>loushi135@163.com</email>
+    <description>first spark plugin</description>
+    <minSparkVersion>2.6.1</minSparkVersion>
+    <java>1.6.0_01</java>
+    <class>org.jivesoftware.spark.lsq.ExamplePlugin</class>
+    <os>Windows,Linux,Mac</os>
+</plugin>

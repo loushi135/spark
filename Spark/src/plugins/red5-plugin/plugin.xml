@@ -1,0 +1,10 @@
+<plugin>
+    <name>Red5 for Spark</name>
+    <version>0.0.6</version>
+    <author>Dele Olajide</author>
+    <homePage></homePage>
+    <email>dele@uk2.net</email>
+    <description>Adds support for Red5 audio and video streaming to the Spark IM client.</description>
+    <class>org.jivesoftware.spark.plugin.red5.Red5Plugin</class>
+    <minSparkVersion>2.0.0.0</minSparkVersion>
+</plugin>

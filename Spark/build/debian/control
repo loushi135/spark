@@ -1,0 +1,13 @@
+Source: spark-messenger
+Section: net
+Priority: optional
+Maintainer: Jive Software <webmaster@jivesoftware.com>
+Build-Depends: debhelper, cdbs, patchutils, sun-java6-jdk, ant, fakeroot
+Standards-Version: 3.7.2
+
+Package: spark-messenger
+Section: net
+Priority: optional
+Pre-Depends:  sun-java6-jre
+Architecture: all
+Description: Cross-platform real-time collaboration client optimized for business and organizations.
