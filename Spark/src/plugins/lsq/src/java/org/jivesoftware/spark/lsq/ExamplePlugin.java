@@ -6,6 +6,7 @@ public class ExamplePlugin implements Plugin{
 
 	@Override
 	public void initialize() {
+		
 		System.out.println("Welcome To Spark");
 	}
 
