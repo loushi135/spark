@@ -34,6 +34,7 @@ import java.util.List;
 public class SearchManager {
     private List<Searchable> searchServices = new ArrayList<Searchable>();
     private SearchService ui;
+    private PopupSearchPanel popupSearchPanel;
     private Collection<String> _searchservicesHosts;
 
     private static SearchManager singleton;
@@ -61,7 +62,7 @@ public class SearchManager {
 
     private SearchManager() {
         ui = new SearchService();
-
+        popupSearchPanel = new PopupSearchPanel();
         // By default, the user search is first.
         SwingWorker worker = new SwingWorker() {
             UserSearchService searchWizard;

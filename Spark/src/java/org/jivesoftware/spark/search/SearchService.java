@@ -150,6 +150,7 @@ public class SearchService extends JPanel {
 
 
         Workspace workspace = SparkManager.getWorkspace();
+        //FIXME modify 10 to 1 will change the search to the top  markedByLsq
         workspace.add(this, new GridBagConstraints(0, 10, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
         workspace.invalidate();
         workspace.validate();

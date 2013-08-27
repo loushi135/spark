@@ -251,7 +251,7 @@ public class ChatContainer extends SparkTabbedPane implements MessageListener, C
         getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke("control F"), "searchContacts");
         getActionMap().put("searchContacts", new AbstractAction("searchContacts") {
 			private static final long serialVersionUID = -6904085783599775675L;
-
+			//FIXME search panel todo  markedByLsq
 			public void actionPerformed(ActionEvent evt) {
 			    SwingWorker worker = new SwingWorker() {
 			        

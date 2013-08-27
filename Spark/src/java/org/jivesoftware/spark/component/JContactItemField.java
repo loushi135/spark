@@ -19,19 +19,6 @@
  */
 package org.jivesoftware.spark.component;
 
-import org.jivesoftware.resource.SparkRes;
-import org.jivesoftware.spark.ui.ContactItem;
-import org.jivesoftware.spark.util.ModelUtil;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JWindow;
-import javax.swing.ListCellRenderer;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
@@ -42,7 +29,25 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JWindow;
+import javax.swing.ListCellRenderer;
+
+import org.jivesoftware.resource.SparkRes;
+import org.jivesoftware.spark.SparkManager;
+import org.jivesoftware.spark.ui.ContactGroup;
+import org.jivesoftware.spark.ui.ContactItem;
+import org.jivesoftware.spark.ui.ContactList;
+import org.jivesoftware.spark.util.ModelUtil;
 
 /**
  * Implementation of a popup field from a TextField.
@@ -77,7 +82,6 @@ public class JContactItemField extends JPanel {
         };
 
         this.items = items;
-
         add(textField, BorderLayout.CENTER);
 
 
@@ -114,13 +118,27 @@ public class JContactItemField extends JPanel {
 
         textField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
+            	//focus update the newest contractItemList
+            	final List<ContactItem> contacts = new ArrayList<ContactItem>();
+        	    final Map<String, ContactItem> contactMap = new HashMap<String, ContactItem>();
+        	    final ContactList contactList = SparkManager.getWorkspace().getContactList();
+        	    
+        	    for (ContactGroup contactGroup : contactList.getContactGroups()) {
+        	        contactGroup.clearSelection();
+        	        for (ContactItem contactItem : contactGroup.getContactItems()) {
+        	            if (!contactMap.containsKey(contactItem.getJID())) {
+        	                contacts.add(contactItem);
+        	                contactMap.put(contactItem.getJID(), contactItem);
+        	            }
+        	        }
+        	    }
+        	    setItems(contacts);
             }
 
             public void focusLost(FocusEvent e) {
-                textField.requestFocusInWindow();
+//                textField.requestFocusInWindow();
             }
         });
-
 
         popup = new JWindow();
 
@@ -161,15 +179,15 @@ public class JContactItemField extends JPanel {
 
         String typedItem = textField.getText();
 
-	final List<ContactItem> validItems = new ArrayList<ContactItem>();
-	for (ContactItem contactItem : items) {
-	    String nickname = contactItem.getDisplayName().toLowerCase();
-	    if (nickname.startsWith(typedItem.toLowerCase())) {
-		validItems.add(contactItem);
-	    } else if (typedItem.length() > 2 && nickname.contains(typedItem.toLowerCase())) {
-		validItems.add(contactItem);
-	    }
-	}
+		final List<ContactItem> validItems = new ArrayList<ContactItem>();
+		for (ContactItem contactItem : items) {
+		    String nickname = contactItem.getDisplayName().toLowerCase();
+		    if (nickname.startsWith(typedItem.toLowerCase())) {
+			validItems.add(contactItem);
+		    } else if (typedItem.length() > 2 && nickname.contains(typedItem.toLowerCase())) {
+			validItems.add(contactItem);
+		    }
+		}
 
 
         if (validItems.size() > 0) {
@@ -321,6 +339,4 @@ public class JContactItemField extends JPanel {
     {	
 	list.setSelectedIndex(list.locationToIndex(mouseevent.getPoint()));
     }
-
-
 }
